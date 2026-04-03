@@ -143,3 +143,7 @@ vite.config.ts.timestamp-*
 *.csv
 *.xlsx
 *.json
+
+# Ignore temporary files
+*.tmp
+*.temp
