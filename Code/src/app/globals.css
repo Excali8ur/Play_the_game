@@ -1,3 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom DaisyUI enhancements for Meeplewood */
+@layer components {
+  /* Navbar custom styling with background pattern */
+  .navbar {
+    background-image: 
+      linear-gradient(135deg, transparent 25%, rgba(0, 0, 0, 0.05) 25%, rgba(0, 0, 0, 0.05) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05)),
+      var(--fallback-b2, oklch(var(--b2)));
+    background-size: 20px 20px;
+  }
+
+  /* Enhanced menu item styling */
+  .menu li > * {
+    border-radius: 0.5rem;
+    font-weight: 500;
+  }
+
+  /* Active menu item with glow effect */
+  .menu li > .bg-primary {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu li > .bg-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .menu li > .bg-primary:hover::before {
+    left: 100%;
+  }
+
+  /* Hover state for non-active items - darker overlay */
+  .menu li > *:hover:not(.bg-primary) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+    transform: translateY(-1px);
+  }
+
+  /* Card hover effects */
+  .card {
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
