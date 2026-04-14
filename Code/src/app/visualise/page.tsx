@@ -32,26 +32,31 @@ export default function VisualisePage() {
     .filter((d) => d.label);
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Visualise</h1>
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <h1 className="text-3xl font-bold mb-6">Visualise</h1>
 
       {records.length === 0 ? (
-        <p className="text-gray-500">
-          No data loaded. Import data first via the{" "}
-          <a href="/import" className="text-indigo-600 underline">
-            Import
-          </a>{" "}
-          page.
-        </p>
+        <div className="alert alert-info shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>
+            No data loaded. Import data first via the{" "}
+            <a href="/import" className="link link-primary font-semibold">
+              Import
+            </a>{" "}
+            page.
+          </span>
+        </div>
       ) : (
         <>
-          <div className="flex gap-4 mb-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Label column
+          <div className="flex flex-wrap gap-4 mb-6">
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text font-medium">Label column</span>
               </label>
               <select
-                className="border border-gray-300 rounded px-3 py-1.5 text-sm"
+                className="select select-bordered w-full"
                 value={labelKey}
                 onChange={(e) => setLabelKey(e.target.value)}
               >
@@ -64,12 +69,13 @@ export default function VisualisePage() {
                   ))}
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Value column (numeric)
+            
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text font-medium">Value column (numeric)</span>
               </label>
               <select
-                className="border border-gray-300 rounded px-3 py-1.5 text-sm"
+                className="select select-bordered w-full"
                 value={valueKey}
                 onChange={(e) => setValueKey(e.target.value)}
               >
@@ -81,9 +87,11 @@ export default function VisualisePage() {
               </select>
             </div>
           </div>
-
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <BarChart data={chartData} />
+       
+          <div className="card bg-base-100 shadow-xl">
+            <div className="card-body">
+              <BarChart data={chartData} />
+            </div>
           </div>
         </>
       )}

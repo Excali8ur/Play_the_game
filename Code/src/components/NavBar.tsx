@@ -15,9 +15,9 @@ export default function NavBar() {
   const pathname = usePathname();
 
   return (
-    <nav className="navbar bg-base-200 shadow-xl sticky top-0 z-50">
-      <div className="navbar-start">
-        <Link href="/" className="btn btn-ghost text-xl gap-2 hover:bg-base-300">
+    <div>
+      <div>
+        <Link href="/">
           <Image 
             src="/MeepleDragon_Leafy.png" 
             alt="Meeplewood Logo" 
@@ -25,23 +25,17 @@ export default function NavBar() {
             height={40} 
             className="w-10 h-10" 
           />
-          <span className="font-bold hidden sm:inline">Meeplewood</span>
+          <span>Meeplewood</span>
         </Link>
       </div>
       
-      <div className="navbar-end">
-        <ul className="menu menu-horizontal px-1 gap-1 flex flex-row items-center">
+      <div>
+        <ul>
           {nav.map(({ href, label }) => (
             <li key={href}>
               <Link
                 href={href}
-                className={`
-                  transition-all duration-200
-                  ${pathname === href 
-                    ? "bg-primary text-primary-content font-semibold shadow-lg" 
-                    : "hover:bg-base-300 hover:shadow-md"
-                  }
-                `}
+                className={`btn btn-primary ${pathname === href ? "active" : ""}`}
               >
                 {label}
               </Link>
@@ -49,6 +43,6 @@ export default function NavBar() {
           ))}
         </ul>
       </div>
-    </nav>
+    </div>
   );
 }

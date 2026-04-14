@@ -26,17 +26,17 @@ const tiles = [
 
 export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto mt-12">
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="text-center mb-12">
         <Image 
           src="/MeepleWood_Banner.png" 
           alt="Meeplewood Banner" 
           width={600} 
-          height={180} 
+          height={180}
           className="mx-auto mb-6" 
         />
         <h1 className="text-4xl font-bold mb-3">Meeplewood</h1>
-        <p className="text-lg opacity-70">
+        <p className="text-primary opacity-80">
           Import, manage, explore, and export your board game data.
         </p>
       </div>
@@ -46,7 +46,7 @@ export default function Home() {
           <Link
             key={href}
             href={href}
-            className="card bg-base-200 hover:bg-base-300 transition-colors shadow-lg hover:shadow-xl"
+            className="card bg-base-200 hover:bg-base-300 transition-colors shadow-xl hover:shadow-2xl"
           >
             <div className="card-body">
               <h2 className="card-title text-primary">{title}</h2>

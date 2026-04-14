@@ -29,9 +29,9 @@ export default function RootLayout({
       data-theme="forest"
       className={`${geistSans.variable} ${geistMono.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-screen flex flex-col">
         <NavBar />
-        <main className="flex-1 container mx-auto px-4 py-8">{children}</main>
+        <main className="flex-1">{children}</main>
       </body>
     </html>
   );

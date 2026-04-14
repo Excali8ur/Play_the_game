@@ -43,84 +43,80 @@ export default function DataPage() {
 
   const headers = records.length > 0 ? Object.keys(records[0]).filter((k) => k !== "id") : [];
 
+  const renderContent = () => {
+    if (loading) {
+      return <div className="flex justify-center py-8"><span className="loading loading-spinner loading-lg text-primary"></span></div>;
+    }
+    if (records.length === 0) {
+      return (
+        <div className="alert alert-info">
+          <span>No records. Import data via the <a href="/import" className="link link-primary">Import</a> page, or add a row below.</span>
+        </div>
+      );
+    }
+    return (
+      <div className="overflow-x-auto">
+        <table className="table table-zebra">
+          <thead>
+            <tr>
+              {headers.map((h) => (
+                <th key={h}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {records.map((r) => (
+              <tr key={r.id} className="hover">
+                {headers.map((h) => (
+                  <td key={h}>{String(r[h] ?? "")}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
   return (
-    <div className="max-w-5xl mx-auto">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Data</h1>
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Data</h1>
         {records.length > 0 && (
-          <button
-            onClick={handleClear}
-            className="text-sm text-red-600 border border-red-300 px-3 py-1.5 rounded hover:bg-red-50 transition"
-          >
-            Clear all
-          </button>
+          <button className="btn btn-error btn-sm" onClick={handleClear}>Clear all</button>
         )}
       </div>
 
-      {loading ? (
-        <p className="text-gray-400">Loading…</p>
-      ) : records.length === 0 ? (
-        <p className="text-gray-500">
-          No records. Import data via the{" "}
-          <a href="/import" className="text-indigo-600 underline">Import</a> page,
-          or add a row below.
-        </p>
-      ) : (
-        <div className="overflow-x-auto rounded-xl border border-gray-200 mb-6">
-          <table className="w-full text-sm">
-            <thead className="bg-gray-50">
-              <tr>
-                {headers.map((h) => (
-                  <th key={h} className="px-4 py-2 text-left font-medium text-gray-600">
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {records.map((r) => (
-                <tr key={r.id} className="hover:bg-gray-50">
-                  {headers.map((h) => (
-                    <td key={h} className="px-4 py-2 text-gray-800">
-                      {String(r[h] ?? "")}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      {renderContent()}
 
       {/* Add row */}
-      <div className="bg-white rounded-xl border border-gray-200 p-5">
-        <h2 className="font-semibold mb-3">Add a row</h2>
-        {columns.length === 0 ? (
-          <p className="text-sm text-gray-400">
-            Import data first to define columns, then add rows here.
-          </p>
-        ) : (
-          <div className="flex flex-wrap gap-3 mb-3">
-            {columns.map((col) => (
-              <div key={col} className="flex flex-col gap-1">
-                <label className="text-xs text-gray-500">{col}</label>
-                <input
-                  className="border border-gray-300 rounded px-2 py-1 text-sm w-40"
-                  value={newRow[col] ?? ""}
-                  onChange={(e) =>
-                    setNewRow((prev) => ({ ...prev, [col]: e.target.value }))
-                  }
-                />
+      <div className="card bg-base-200 shadow-xl mt-8">
+        <div className="card-body">
+          <h2 className="card-title">Add a row</h2>
+          {columns.length === 0 ? (
+            <p className="opacity-70">
+              Import data first to define columns, then add rows here.
+            </p>
+          ) : (
+            <div className="flex flex-wrap gap-4">
+              {columns.map((col) => (
+                <div key={col} className="form-control w-full max-w-xs">
+                  <label className="label"><span className="label-text">{col}</span></label>
+                  <input
+                    className="input input-bordered w-full"
+                    value={newRow[col] ?? ""}
+                    onChange={(e) =>
+                      setNewRow((prev) => ({ ...prev, [col]: e.target.value }))
+                    }
+                  />
+                </div>
+              ))}
+              <div className="w-full">
+                <button className="btn btn-primary mt-4" onClick={handleAdd}>Add</button>
               </div>
-            ))}
-            <button
-              onClick={handleAdd}
-              className="self-end bg-indigo-600 text-white text-sm px-4 py-1.5 rounded hover:bg-indigo-700 transition"
-            >
-              Add
-            </button>
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

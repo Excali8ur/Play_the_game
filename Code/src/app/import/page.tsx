@@ -46,34 +46,38 @@ export default function ImportPage() {
   };
 
   return (
-    <div className="max-w-lg mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Import</h1>
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <p className="text-sm text-gray-500 mb-4">
-          Upload an <strong>.xlsx</strong> or <strong>.json</strong> file.
-          The first row of Excel files is treated as the header. JSON files must
-          be an array of objects.
-        </p>
-        <label className="cursor-pointer inline-block bg-indigo-600 text-white text-sm px-4 py-2 rounded hover:bg-indigo-700 transition">
-          Choose file
-          <input
-            type="file"
-            accept=".xlsx,.json"
-            className="hidden"
-            onChange={handleFile}
-          />
-        </label>
+    <div className="container mx-auto px-4 py-8 max-w-2xl">
+      <h1 className="text-3xl font-bold mb-6">Import</h1>
+      <div className="card bg-base-200 shadow-xl">
+        <div className="card-body">
+          <p className="mb-4">
+            Upload an <strong>.xlsx</strong> or <strong>.json</strong> file.
+            The first row of Excel files is treated as the header. JSON files must
+            be an array of objects.
+          </p>
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text font-medium">Choose file</span>
+            </label>
+            <input
+              type="file"
+              accept=".xlsx,.json"
+              onChange={handleFile}
+              className="file-input file-input-bordered file-input-primary w-full"
+            />
+          </div>
 
-        {status && (
-          <p className="mt-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded px-3 py-2">
-            {status}
-          </p>
-        )}
-        {error && (
-          <p className="mt-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded px-3 py-2">
-            {error}
-          </p>
-        )}
+          {status && (
+            <div className="alert alert-success mt-4">
+              <span>{status}</span>
+            </div>
+          )}
+          {error && (
+            <div className="alert alert-error mt-4">
+              <span>{error}</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
