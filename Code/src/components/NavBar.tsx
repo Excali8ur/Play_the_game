@@ -15,21 +15,33 @@ export default function NavBar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-white border-b border-gray-200 shadow-sm">
-      <div className="container mx-auto px-4 flex items-center gap-6 h-20">
-        <Image src="/MeepleDragon_Leafy.png" alt="Meeplewood Logo" width={50} height={50} className="w-20 h-20" />
-        {nav.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className={`text-sm font-medium transition-colors hover:text-indigo-600 ${
-              pathname === href ? "text-indigo-600" : "text-gray-600"
-            }`}
-          >
-            {label}
-          </Link>
-        ))}
+    <div className="navbar bg-base-100 shadow-lg">
+      <div className="flex-1">
+        <Link href="/" className="btn btn-ghost normal-case text-xl gap-2">
+          <Image 
+            src="/MeepleDragon_Leafy.png" 
+            alt="Meeplewood Logo" 
+            width={40} 
+            height={40} 
+            className="w-10 h-10" 
+          />
+          <span className="font-bold">Meeplewood</span>
+        </Link>
       </div>
-    </nav>
+      <div className="flex-none">
+        <ul className="menu menu-horizontal px-1">
+          {nav.map(({ href, label }) => (
+            <li key={href}>
+              <Link
+                href={href}
+                className={pathname === href ? "active" : ""}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
