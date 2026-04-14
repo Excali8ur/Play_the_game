@@ -26,23 +26,32 @@ const tiles = [
 
 export default function Home() {
   return (
-    <div className="max-w-2xl mx-auto mt-12">
-      <Image src="/MeepleWood_Banner.png" alt="Meeplewood Banner" width={500} height={150} className="w-3/4 mb-6" />
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">Meeplewood</h1>
-      <p className="text-gray-500 mb-10">
-        Import, manage, explore, and export your data.
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="max-w-4xl mx-auto mt-12">
+      <div className="text-center mb-12">
+        <Image 
+          src="/MeepleWood_Banner.png" 
+          alt="Meeplewood Banner" 
+          width={600} 
+          height={180} 
+          className="mx-auto mb-6" 
+        />
+        <h1 className="text-4xl font-bold mb-3">Meeplewood</h1>
+        <p className="text-lg opacity-70">
+          Import, manage, explore, and export your board game data.
+        </p>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {tiles.map(({ href, title, description }) => (
           <Link
             key={href}
             href={href}
-            className="block p-6 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-indigo-300 transition"
+            className="card bg-base-200 hover:bg-base-300 transition-colors shadow-lg hover:shadow-xl"
           >
-            <h2 className="text-lg font-semibold text-indigo-600 mb-1">
-              {title}
-            </h2>
-            <p className="text-sm text-gray-500">{description}</p>
+            <div className="card-body">
+              <h2 className="card-title text-primary">{title}</h2>
+              <p className="opacity-70">{description}</p>
+            </div>
           </Link>
         ))}
       </div>
