@@ -139,10 +139,9 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 # Don't add the actual data
-/Code/data
-*.csv
-*.xlsx
-*.json
+/Code/data/*.json
+/Code/data/*.csv
+/Code/data/*.xlsx
 
 # Ignore temporary files
 *.tmp
